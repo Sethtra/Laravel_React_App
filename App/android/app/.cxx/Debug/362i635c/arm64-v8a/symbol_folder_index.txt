@@ -1,0 +1,1 @@
+C:\Users\costomer\Desktop\School\Laravel_React_App\App\build\app\intermediates\cxx\Debug\362i635c\obj\arm64-v8a

@@ -1,0 +1,36 @@
+// File: android/build.gradle (Root level)
+buildscript {
+    // --- FIX: Update Kotlin version ---
+    ext.kotlin_version = '1.9.24' // Updated for compatibility with AGP 8.5.0 and Java 21
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        // --- FIX: Add Android Gradle Plugin (AGP) dependency ---
+        classpath 'com.android.tools.build:gradle:8.5.0' // Added AGP 8.5.0 (compatible with Gradle 8.10.2)
+
+        // Keep the Kotlin plugin dependency (uses the updated version)
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.buildDir = '../build'
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
