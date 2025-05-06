@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart'; // <-- MOST IMPORTANT: ADD THIS
-import 'package:provider/provider.dart'; // <-- ADD THIS
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../providers/cart_provider.dart';
-// import '../models/cart_item.dart' as ci; // Already imported by CartItemWidget
 import '../widgets/cart_item_widget.dart';
+import 'checkout_page.dart'; // Import CheckoutPage for routeName
 
 // Re-using color constants, ensure they are accessible or redefine them here
 const Color appAccentRed = Color(0xFFFF6B6B);
@@ -11,46 +11,32 @@ const Color appDarkText = Color(0xFF333333);
 const Color appLightText = Color(0xFF757575);
 
 class CartPage extends StatelessWidget {
-  // This should be fine now
   static const routeName = '/cart';
 
-  const CartPage({super.key}); // This should be fine now
+  const CartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Widget and BuildContext should be fine
-    final cart = Provider.of<CartProvider>(
-      context,
-    ); // Provider and CartProvider should be fine
+    final cart = Provider.of<CartProvider>(context);
     final cartItems = cart.cartItemsList;
 
     return Scaffold(
-      // Scaffold should be fine
-      backgroundColor: Colors.white, // Colors should be fine
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        // AppBar should be fine
         title: Column(
-          // Column should be fine
           children: [
-            const Text('Your Cart'), // Text should be fine
+            const Text('Your Cart'),
             if (cart.itemCount > 0)
               Text(
                 '${cart.itemCount} ${cart.itemCount == 1 ? 'item' : 'items'}',
-                style: const TextStyle(
-                  fontSize: 12,
-                  color: appLightText,
-                ), // TextStyle should be fine
+                style: const TextStyle(fontSize: 12, color: appLightText),
               ),
           ],
         ),
         centerTitle: true,
         leading: IconButton(
-          // IconButton should be fine
-          icon: const Icon(
-            Icons.arrow_back_ios,
-          ), // Icon and Icons should be fine
-          onPressed:
-              () => Navigator.of(context).pop(), // Navigator should be fine
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () => Navigator.of(context).pop(),
         ),
         backgroundColor: Colors.white,
         elevation: 1,
@@ -58,37 +44,32 @@ class CartPage extends StatelessWidget {
       body:
           cartItems.isEmpty
               ? Center(
-                // Center should be fine
                 child: Column(
-                  mainAxisAlignment:
-                      MainAxisAlignment
-                          .center, // MainAxisAlignment should be fine
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
                       Icons.remove_shopping_cart_outlined,
                       size: 80,
                       color: Colors.grey[300],
                     ),
-                    const SizedBox(height: 20), // SizedBox should be fine
+                    const SizedBox(height: 20),
                     const Text(
                       'Your Cart is Empty',
                       style: TextStyle(fontSize: 20, color: appLightText),
                     ),
                     const SizedBox(height: 30),
                     ElevatedButton(
-                      // ElevatedButton should be fine
                       onPressed: () {
                         Navigator.of(
                           context,
                         ).popUntil((route) => route.isFirst);
                       },
                       style: ElevatedButton.styleFrom(
-                        // ElevatedButton.styleFrom should be fine
                         backgroundColor: appAccentRed,
                         padding: const EdgeInsets.symmetric(
                           horizontal: 30,
                           vertical: 12,
-                        ), // EdgeInsets should be fine
+                        ),
                       ),
                       child: const Text('Go Shopping'),
                     ),
@@ -96,7 +77,6 @@ class CartPage extends StatelessWidget {
                 ),
               )
               : ListView.builder(
-                // ListView.builder should be fine
                 padding: const EdgeInsets.symmetric(
                   horizontal: 15.0,
                   vertical: 10.0,
@@ -110,41 +90,32 @@ class CartPage extends StatelessWidget {
   }
 
   Widget _buildCheckoutSection(BuildContext context, CartProvider cart) {
-    // Widget, BuildContext, CartProvider should be fine
     return Container(
-      // Container should be fine
       padding: EdgeInsets.only(
-        // EdgeInsets should be fine
         left: 20,
         right: 20,
         top: 15,
-        bottom:
-            MediaQuery.of(context).padding.bottom +
-            15, // MediaQuery should be fine
+        bottom: MediaQuery.of(context).padding.bottom + 15,
       ),
       decoration: BoxDecoration(
-        // BoxDecoration should be fine
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            // BoxShadow should be fine
             color: Colors.grey.withOpacity(0.15),
             spreadRadius: 1,
             blurRadius: 8,
-            offset: const Offset(0, -3), // Offset should be fine
+            offset: const Offset(0, -3),
           ),
         ],
         borderRadius: const BorderRadius.only(
-          // BorderRadius should be fine
-          topLeft: Radius.circular(24), // Radius should be fine
+          topLeft: Radius.circular(24),
           topRight: Radius.circular(24),
         ),
       ),
       child: Column(
-        mainAxisSize: MainAxisSize.min, // MainAxisSize should be fine
+        mainAxisSize: MainAxisSize.min,
         children: [
           Row(
-            // Row should be fine
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
@@ -161,13 +132,9 @@ class CartPage extends StatelessWidget {
               ),
               const SizedBox(width: 15),
               const Expanded(
-                // Expanded should be fine
                 child: Text(
                   'Add voucher code',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
-                  ), // FontWeight should be fine
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
                 ),
               ),
               IconButton(
@@ -178,7 +145,6 @@ class CartPage extends StatelessWidget {
                 ),
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    // ScaffoldMessenger and SnackBar should be fine
                     const SnackBar(content: Text('Add voucher tapped!')),
                   );
                 },
@@ -190,9 +156,7 @@ class CartPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
-                crossAxisAlignment:
-                    CrossAxisAlignment
-                        .start, // CrossAxisAlignment should be fine
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
                     'Total:',
@@ -211,9 +175,9 @@ class CartPage extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Checkout tapped!')),
-                  );
+                  Navigator.of(
+                    context,
+                  ).pushNamed(CheckoutPage.routeName); // Corrected line
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(
