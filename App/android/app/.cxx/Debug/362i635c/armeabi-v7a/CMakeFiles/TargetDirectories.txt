@@ -1,2 +1,0 @@
-C:/Users/costomer/Desktop/School/Laravel_React_App/App/android/app/.cxx/Debug/362i635c/armeabi-v7a/CMakeFiles/edit_cache.dir
-C:/Users/costomer/Desktop/School/Laravel_React_App/App/android/app/.cxx/Debug/362i635c/armeabi-v7a/CMakeFiles/rebuild_cache.dir
